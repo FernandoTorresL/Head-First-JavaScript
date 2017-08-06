@@ -67,6 +67,7 @@ var controller = {
   }
 };
 
+
 function parseGuess(guess) {
   var alphabet = ["A", "B", "C", "D", "E", "F", "G"];
 
@@ -89,19 +90,45 @@ function parseGuess(guess) {
   return null;
 }
 
-controller.processGuess("A0");
+function init() {
+  var fireButton = document.getElementById("fireButton");
+  fireButton.onclick = handleFireButton;
+  var guessInput = document.getElementById("guessInput");
+  guessInput.onkeypress = handleKeyPress;
+}
 
-controller.processGuess("A6");
-controller.processGuess("B6");
-controller.processGuess("C6");
+function  handleKeyPress(e) {
+  var fireButton = document.getElementById("fireButton");
+  if (e.keyCode === 13) {
+    fireButton.click();
+    return false;
+  }
+}
 
-controller.processGuess("C4");
-controller.processGuess("D4");
-controller.processGuess("E4");
+function handleFireButton() {
+  var guessInput = document.getElementById("guessInput");
+  var guess = guessInput.value;
+  controller.processGuess(guess);
 
-controller.processGuess("B0");
-controller.processGuess("B1");
-controller.processGuess("B2");
+  guess.value = "";
+}
+
+window.onload = init;
+
+
+// controller.processGuess("A0");
+
+// controller.processGuess("A6");
+// controller.processGuess("B6");
+// controller.processGuess("C6");
+
+// controller.processGuess("C4");
+// controller.processGuess("D4");
+// controller.processGuess("E4");
+
+// controller.processGuess("B0");
+// controller.processGuess("B1");
+// controller.processGuess("B2");
 
 // console.log(parseGuess("A0"));
 // console.log(parseGuess("B6"));
