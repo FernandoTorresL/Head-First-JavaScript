@@ -52,6 +52,21 @@ var model = {
   }
 };
 
+var controller = {
+  guesses: 0,
+
+  processGuess: function(guess) {
+    var location = parseGuess(guess);
+    if (location) {
+      this.guesses++;
+      var hit = model.fire(location);
+      if (hit && model.shipsSunk === model.numShips) {
+        view.displayMessage("You sank all my battleships, in " + this.guesses + " guesses");
+      }
+    }
+  }
+};
+
 function parseGuess(guess) {
   var alphabet = ["A", "B", "C", "D", "E", "F", "G"];
 
@@ -74,11 +89,25 @@ function parseGuess(guess) {
   return null;
 }
 
-console.log(parseGuess("A0"));
-console.log(parseGuess("B6"));
-console.log(parseGuess("G3"));
-console.log(parseGuess("H0"));
-console.log(parseGuess("A7"));
+controller.processGuess("A0");
+
+controller.processGuess("A6");
+controller.processGuess("B6");
+controller.processGuess("C6");
+
+controller.processGuess("C4");
+controller.processGuess("D4");
+controller.processGuess("E4");
+
+controller.processGuess("B0");
+controller.processGuess("B1");
+controller.processGuess("B2");
+
+// console.log(parseGuess("A0"));
+// console.log(parseGuess("B6"));
+// console.log(parseGuess("G3"));
+// console.log(parseGuess("H0"));
+// console.log(parseGuess("A7"));
 
 /*view.displayMiss("00");
 view.displayHit("34");
@@ -91,18 +120,18 @@ view.displayMessage("Tap tap, is this thing on?");*/
 
 
 /*Testing model object:*/
-model.fire("53"); // miss
+// model.fire("53"); // miss
 
-model.fire("06"); // hit
-model.fire("16"); // hit
-model.fire("26"); // hit
+// model.fire("06"); // hit
+// model.fire("16"); // hit
+// model.fire("26"); // hit
 
-model.fire("34"); // hit
-model.fire("24"); // hit
-model.fire("44"); // hit
+// model.fire("34"); // hit
+// model.fire("24"); // hit
+// model.fire("44"); // hit
 
-model.fire("12"); // hit
-model.fire("11"); // hit
-model.fire("10"); // hit
+// model.fire("12"); // hit
+// model.fire("11"); // hit
+// model.fire("10"); // hit
 
 
